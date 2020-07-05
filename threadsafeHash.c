@@ -314,6 +314,38 @@ void automatedTesting()
 }
 
 
+void freeHashTable (void)
+{
+	
+	// Free indiviual nodes linked lists hanging from buckets
+	printf("\n Deleting Hash table\n");
+
+	int index = 0;
+	bucket* bucket_ptr = NULL;
+	
+	for (index=0; index<CAPACITY; index++)
+	{
+		bucket_ptr = table_ptr_arr[0]->bucket_ptr_arr[index];
+		while (bucket_ptr != NULL)
+	        {
+				free(bucket_ptr);
+                bucket_ptr = bucket_ptr->next;
+	  	    }
+		// may be free individual buckets
+		free(bucket_ptr);
+	
+	}
+	
+	
+	
+	// free the complete hash table
+	
+	free(table_ptr_arr[0]);
+	
+	
+}
+
+
 int main()
 {
 	int i,choice;
@@ -375,7 +407,8 @@ int main()
 	
 		else if (choice == 0)
 			{
-	  			printf("........Exiting.......\n");
+	  			freeHashTable();
+				printf("........Exiting.......\n");
 	  			break;	  
 			}
 		else {
